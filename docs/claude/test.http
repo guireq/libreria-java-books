@@ -1,0 +1,57 @@
+### 1. Obtener código de autorización
+### Acceder a esta URL en el navegador (reemplazar los valores según sea necesario)
+GET http://localhost:9000/oauth2/authorize?response_type=code&client_id=javabooks-client&scope=libros.read%20libros.write&redirect_uri=http://localhost:8080/authorized
+
+### 2. Intercambiar código por token
+POST http://localhost:9000/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic amF2YWJvb2tzLWNsaWVudDpzZWNyZXQ=
+
+grant_type=authorization_code&code=CODIGO_OBTENIDO_DEL_PASO_1&redirect_uri=http://localhost:8080/authorized&client_id=javabooks-client
+
+### 3. Crear un libro (requiere rol ADMIN y scope libros.write)
+POST http://localhost:9000/api/book
+Content-Type: application/json
+Authorization: Bearer TOKEN_OBTENIDO_DEL_PASO_2
+
+{
+    "titulo": "Spring Boot in Action",
+    "autor": "Craig Walls",
+    "cantidadPaginas": 472,
+    "categoria": "FRAMEWORKS",
+    "contenido": "Contenido del libro Spring Boot in Action"
+}
+
+### 4. Buscar libro por título (requiere scope libros.read)
+GET http://localhost:9000/api/book/title/Clean Code
+Authorization: Bearer TOKEN_OBTENIDO_DEL_PASO_2
+
+### 5. Buscar libros por autor (requiere scope libros.read)
+GET http://localhost:9000/api/book/author/Robert C. Martin
+Authorization: Bearer TOKEN_OBTENIDO_DEL_PASO_2
+
+### 6. Eliminar libro (requiere rol ADMIN y scope libros.write)
+DELETE http://localhost:9000/api/book/1
+Authorization: Bearer TOKEN_OBTENIDO_DEL_PASO_2
+
+### Ejemplo de token decodificado (JWT):
+### Header:
+# {
+#   "alg": "RS256",
+#   "typ": "JWT",
+#   "kid": "key-id"
+# }
+
+### Payload:
+# {
+#   "sub": "admin",
+#   "aud": "javabooks-client",
+#   "nbf": 1703000000,
+#   "scope": "libros.read libros.write",
+#   "roles": ["ADMIN"],
+#   "categorias": ["PROGRAMMING", "FRAMEWORKS", "ARCHITECTURE"],
+#   "autores": ["Robert C. Martin", "Joshua Bloch", "David Thomas", "Gang of Four", "Craig Walls", "Chris Richardson", "Eric Evans"],
+#   "iss": "http://localhost:9000",
+#   "exp": 1703003600,
+#   "iat": 1703000000
+# }
