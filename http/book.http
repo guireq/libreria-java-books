@@ -1,0 +1,48 @@
+# http://localhost:8081/callback?
+    # code=0GM8KrhxvCiTrUm4HtBg9crLaKQxfWDfeRod4F2c3CDdZwoBI1Hl7MVQD4JEDhdZruM9Cvw9a1uq-lvnAz71bXMp4xXlIgAteGLTsZd8t_JC8heZfP2LtrSeZzMzB2FR
+    # &state=xyz
+
+
+curl -X POST 'http://localhost:9000/oauth2/token' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Basic d2ViLWNsaWVudDp3ZWItc2VjcmV0' \
+  -d 'grant_type=authorization_code&code=0GM8KrhxvCiTrUm4HtBg9crLaKQxfWDfeRod4F2c3CDdZwoBI1Hl7MVQD4JEDhdZruM9Cvw9a1uq-lvnAz71bXMp4xXlIgAteGLTsZd8t_JC8heZfP2LtrSeZzMzB2FR&redirect_uri=http://localhost:8081/callback&code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk'
+
+# {
+#   "access_token": "eyJraWQiOiI0ZmFkMTBkNS1iNWM4LTQxNDgtYTkyYS1iZGEzMDVkZWMxMDEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IndlYi1jbGllbnQiLCJuYmYiOjE3NDgxMjIwMzcsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAiLCJleHAiOjE3NDgxMjM4MzcsImlhdCI6MTc0ODEyMjAzNywianRpIjoiMzk0ZTg1ZjUtOGQ0MC00YTVmLThiMjktMzBlOGRmOTFhMmJhIn0.LDCMj9IGKu76JrHU1ThM2L4bni7xkAd6hZ_1zgcBiBGoI3o8VOkcQyF-gGlgCHiQaL4rENmzEm8531HX5ByMEnV2LjuSvILzPqMMhp3009nMuSvwYBO3X7ve8L4eJdyms6pIL4zAJrZbAIzSr50PwHsZQ8QPHaYF5_c4s9pkjcsLh-Pq28tnzyh3K10B6NRsSlu8ZUiE5QwOIpI-N43XWlAfFxDqeL4IacHMvdipQGsjFdZVkccIgkWzLy4KiiD8LGOqm9Ewf-yUwff2uWnkaQJul8GCRPLUfhwIAqsMO9_L55-gObKbKO2sdZVvNYtfArvIciBmEDLtZRtOv1jxjw",
+#   "refresh_token": "_Ac88qR7Y4VOK-fHU3WOwC21Hqu94PCN7dyRpyWu4P7ejYxFPHMybwyrc8dRSNUuRVMo2JUub0Q-cJn182gUPoeA05ZcvhI2MC9uiFIBehoNWOpMF_RHpi3CNDjnPq2X",
+#   "scope": "read write",
+#   "token_type": "Bearer",
+#   "expires_in": 1800
+# }
+
+@token=QiOiI0ZmFkMTBkNS1iNWM4LTQxNDgtYTkyYS1iZGEzMDVkZWMxMDEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IndlYi1jbGllbnQiLCJuYmYiOjE3NDgxMjIwMzcsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAiLCJleHAiOjE3NDgxMjM4MzcsImlhdCI6MTc0ODEyMjAzNywianRpIjoiMzk0ZTg1ZjUtOGQ0MC00YTVmLThiMjktMzBlOGRmOTFhMmJhIn0.LDCMj9IGKu76JrHU1ThM2L4bni7xkAd6hZ_1zgcBiBGoI3o8VOkcQyF-gGlgCHiQaL4rENmzEm8531HX5ByMEnV2LjuSvILzPqMMhp3009nMuSvwYBO3X7ve8L4eJdyms6pIL4zAJrZbAIzSr50PwHsZQ8QPHaYF5_c4s9pkjcsLh-Pq28tnzyh3K10B6NRsSlu8ZUiE5QwOIpI-N43XWlAfFxDqeL4IacHMvdipQGsjFdZVkccIgkWzLy4KiiD8LGOqm9Ewf-yUwff2uWnkaQJul8GCRPLUfhwIAqsMO9_L55-gObKbKO2sdZVvNYtfArvIciBmEDLtZRtOv1jxjw
+
+### 2. Buscar todos los libros (requiere scope libros.read)
+GET http://localhost:9000/api/book
+Authorization: Bearer eyJraWQiOiI0ZmFkMTBkNS1iNWM4LTQxNDgtYTkyYS1iZGEzMDVkZWMxMDEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiYXVkIjoid2ViLWNsaWVudCIsIm5iZiI6MTc0ODEyMTQxNSwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTAwMCIsImV4cCI6MTc0ODEyMzIxNSwiaWF0IjoxNzQ4MTIxNDE1LCJqdGkiOiJiMTM1MGUyZS04ZjZhLTRkNDUtOTJhZi01Y2UxNjAzZTg0OWQifQ.Q3AL9lSY6K7pv2hjBkoBA8e2-M0HZ5XBl7Qi3i-08brmxZGWrYPfNMECVkiQlFa1JMqrpqzaazTsNyfpalNfaUlH1OUgQKklF5i1_DBtX9lFM0iC6sdpmSMocULgPCeFgXpZu7X_Kc2OSPiyaEyR9RqQBKR4w1q4YqOtjdNoRS4Gsvru1yBRCOr_LUBW1lsuNcmsfSpww6Q5bggWNMLfMXhbMPIXM6qcxD1UijtXDvJ2e9epiRGnr5ABvGfzi2Qq-LZPo2TuDg3qZd7kjMIehkkq5ZnddsFpYNh_igXpXpDeN_zw6E_RvJKlC344UHWZtgNuo9dvtvYz-RqneZz4TQ
+
+### 3. Crear un libro (requiere rol ADMIN y scope libros.write)
+POST http://localhost:9000/api/book
+Content-Type: application/json
+Authorization: Bearer QiOiI0ZmFkMTBkNS1iNWM4LTQxNDgtYTkyYS1iZGEzMDVkZWMxMDEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IndlYi1jbGllbnQiLCJuYmYiOjE3NDgxMjIwMzcsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAiLCJleHAiOjE3NDgxMjM4MzcsImlhdCI6MTc0ODEyMjAzNywianRpIjoiMzk0ZTg1ZjUtOGQ0MC00YTVmLThiMjktMzBlOGRmOTFhMmJhIn0.LDCMj9IGKu76JrHU1ThM2L4bni7xkAd6hZ_1zgcBiBGoI3o8VOkcQyF-gGlgCHiQaL4rENmzEm8531HX5ByMEnV2LjuSvILzPqMMhp3009nMuSvwYBO3X7ve8L4eJdyms6pIL4zAJrZbAIzSr50PwHsZQ8QPHaYF5_c4s9pkjcsLh-Pq28tnzyh3K10B6NRsSlu8ZUiE5QwOIpI-N43XWlAfFxDqeL4IacHMvdipQGsjFdZVkccIgkWzLy4KiiD8LGOqm9Ewf-yUwff2uWnkaQJul8GCRPLUfhwIAqsMO9_L55-gObKbKO2sdZVvNYtfArvIciBmEDLtZRtOv1jxjw
+
+{
+    "titulo": "Spring Boot in Action",
+    "autor": "Craig Walls",
+    "cantidadPaginas": 472,
+    "categoria": "FRAMEWORKS",
+    "contenido": "Contenido del libro Spring Boot in Action"
+}
+
+### 4. Buscar libro por título (requiere scope libros.read)
+GET http://localhost:9000/api/book/title/Clean Code
+Authorization: Bearer TOKEN_OBTENIDO_DEL_PASO_2
+
+### 5. Buscar libros por autor (requiere scope libros.read)
+GET http://localhost:9000/api/book/author/Robert C. Martin
+Authorization: Bearer TOKEN_OBTENIDO_DEL_PASO_2
+
+### 6. Eliminar libro (requiere rol ADMIN y scope libros.write)
+DELETE http://localhost:9000/api/book/1
+Authorization: Bearer TOKEN_OBTENIDO_DEL_PASO_2

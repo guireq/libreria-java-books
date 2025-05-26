@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth2 Authorization Server - Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin: 0;
+        }
+        
+        .status {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .endpoints {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .endpoint {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .endpoint h3 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+        }
+        
+        .endpoint code {
+            background: #e9ecef;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+        
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 OAuth2 Authorization Server</h1>
+            <p>Servidor funcionando correctamente</p>
+        </div>
+        
+        <div class="status">
+            ✅ <strong>Autenticación Exitosa!</strong> El servidor está listo para procesar solicitudes OAuth2.
+        </div>
+        
+        <div class="endpoints">
+            <div class="endpoint">
+                <h3>🔑 Authorization Endpoint</h3>
+                <code>GET /oauth2/authorize</code>
+                <p>Endpoint para iniciar el flujo de autorización</p>
+            </div>
+            
+            <div class="endpoint">
+                <h3>🎫 Token Endpoint</h3>
+                <code>POST /oauth2/token</code>
+                <p>Endpoint para intercambiar códigos por tokens</p>
+            </div>
+            
+            <div class="endpoint">
+                <h3>👤 UserInfo Endpoint</h3>
+                <code>GET /userinfo</code>
+                <p>Endpoint para obtener información del usuario</p>
+            </div>
+            
+            <div class="endpoint">
+                <h3>🔍 JWK Set Endpoint</h3>
+                <code>GET /oauth2/jwks</code>
+                <p>Endpoint para obtener las claves públicas JWT</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="/api/info" style="color: #667eea; text-decoration: none; margin-right: 1rem;">
+                📊 Server Info
+            </a>
+            <a href="/h2-console" style="color: #667eea; text-decoration: none; margin-right: 1rem;">
+                💾 Database Console
+            </a>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="logout-btn">🚪 Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

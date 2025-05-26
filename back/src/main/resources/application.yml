@@ -1,0 +1,72 @@
+server:
+  port: 9000
+  
+spring:
+  application:
+    name: libreria-java-books
+
+  # Configuración de la base de datos H2
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Configuración de Thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+    
+  # Configuración adicional para CORS
+  web:
+    cors:
+      allowed-origins: 
+        - "*"
+      allowed-methods: 
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+      allowed-headers: "*"
+      allow-credentials: true
+      max-age: 3600
+
+# Configuración de logging
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.security.web: DEBUG
+    org.springframework.security.authentication: DEBUG
+    org.springframework.security.core.userdetails: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.javabooks: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Información de la aplicación
+info:
+  app:
+    name: OAuth2 Authorization Server
+    description: Spring Boot OAuth2 Authorization Server
+    version: 1.0.0        

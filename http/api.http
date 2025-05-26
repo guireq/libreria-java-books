@@ -1,0 +1,55 @@
+###
+http://localhost:9000/oauth2/authorize?response_type=code&client_id=web-client&redirect_uri=http://localhost:8081/callback&scope=libros.read+libros.write&state=xyz&code_challenge=E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM&code_challenge_method=S256
+
+### http://localhost:8081/callback?code=ovyJBovKCCb-0KOx-BluDL7DQjQI9k91sueoS942L19fdf7oyxaJ9_V9PF-IoozFNXQYlF6ZlCD5d_UJyaH89Yq36f21Vr4r_4cSp4vQgzC4o6E6ZMxvhBb8u3KNwn-T&state=xyz
+
+### 1. Obtener el código de autorización
+curl -X POST 'http://localhost:9000/oauth2/token' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Basic d2ViLWNsaWVudDp3ZWItc2VjcmV0' \
+  -d 'grant_type=authorization_code&code=ovyJBovKCCb-0KOx-BluDL7DQjQI9k91sueoS942L19fdf7oyxaJ9_V9PF-IoozFNXQYlF6ZlCD5d_UJyaH89Yq36f21Vr4r_4cSp4vQgzC4o6E6ZMxvhBb8u3KNwn-T&redirect_uri=http://localhost:8081/callback&code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk'
+
+## Ejemplo de uso de cURL para obtener un token de acceso
+# - d 'grant_type=authorization_code&code=TU_CODIGO_AQUI&redirect_uri=http://localhost:8081/callback&code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk'
+
+# {
+#   "access_token": "eyJraWQiOiIzOGQwM2U3Ny03NzkxLTRiMmQtYTJkNi0wYmU4MzBhMWUwYjMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IndlYi1jbGllbnQiLCJuYmYiOjE3NDgxMjkzMjYsInNjb3BlIjpbImxpYnJvcy5yZWFkIiwibGlicm9zLndyaXRlIl0sInJvbGVzIjpbIkFETUlOIiwiVVNFUiJdLCJjYXRlZ29yaWFzIjpbIlBST0dSQU1NSU5HIiwiRlJBTUVXT1JLUyIsIkFSQ0hJVEVDVFVSRSIsIkRBVEFCQVNFUyJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAiLCJhdXRvcmVzIjpbIlJvYmVydCBDLiBNYXJ0aW4iLCJKb3NodWEgQmxvY2giLCJDcmFpZyBXYWxscyIsIk1hcnRpbiBGb3dsZXIiLCJFcmljIEV2YW5zIl0sImV4cCI6MTc0ODIxNTcyNiwiaWF0IjoxNzQ4MTI5MzI2LCJqdGkiOiI5ZjVlMjEyYS1mMGI3LTQzNDUtYmI2OC01Y2QzZDNhMjAyNTkifQ.YS8600vkDIbCnn_3FnMWxk8G3J07ZpouzgDOdr5j-Stnb3AWMeCNlr8P3KmVIQuVM9FD6g-APRkHbXPS8yacPujAUQXN7RY8Cenp_ZA5-m7HAXrj09lZCFSyRZZdBnu2UDD4sSBYXKn7rBJIDnEF0UAGYF3a6jSmNbRnalU6xxzQXQNM6levKiBMUFzc6IdCtMS0N7YUvgby8q2p8_ceQuRuCQrbpU-gBNfuoWXb52LsM3WQtDNzOfgonMvRRq8eiRy01IiDw-K5DVefRXiqx_wAQUJYmHwULSS36z70MY9lkoZ3B-aM4vCQu2BalDlrrpTPdCsffn1uvDQ_YrLJqA",
+#   "refresh_token": "V1e5hFtAObbnW06xG5PLgtS7SJaO8tgxg1oLseGKZ_dIMI3UmE_t9FngKL9ZozFJaWgqKrBjSffYXIoYQVQTytzQRZgm9I5akdee5hXUEA3lf1CGIrIitfl3XmoUX_EW",
+#   "scope": "libros.read libros.write",
+#   "token_type": "Bearer",
+#   "expires_in": 86399
+# }
+
+@token = eyJraWQiOiIzOGQwM2U3Ny03NzkxLTRiMmQtYTJkNi0wYmU4MzBhMWUwYjMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6IndlYi1jbGllbnQiLCJuYmYiOjE3NDgxMjkzMjYsInNjb3BlIjpbImxpYnJvcy5yZWFkIiwibGlicm9zLndyaXRlIl0sInJvbGVzIjpbIkFETUlOIiwiVVNFUiJdLCJjYXRlZ29yaWFzIjpbIlBST0dSQU1NSU5HIiwiRlJBTUVXT1JLUyIsIkFSQ0hJVEVDVFVSRSIsIkRBVEFCQVNFUyJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAiLCJhdXRvcmVzIjpbIlJvYmVydCBDLiBNYXJ0aW4iLCJKb3NodWEgQmxvY2giLCJDcmFpZyBXYWxscyIsIk1hcnRpbiBGb3dsZXIiLCJFcmljIEV2YW5zIl0sImV4cCI6MTc0ODIxNTcyNiwiaWF0IjoxNzQ4MTI5MzI2LCJqdGkiOiI5ZjVlMjEyYS1mMGI3LTQzNDUtYmI2OC01Y2QzZDNhMjAyNTkifQ.YS8600vkDIbCnn_3FnMWxk8G3J07ZpouzgDOdr5j-Stnb3AWMeCNlr8P3KmVIQuVM9FD6g-APRkHbXPS8yacPujAUQXN7RY8Cenp_ZA5-m7HAXrj09lZCFSyRZZdBnu2UDD4sSBYXKn7rBJIDnEF0UAGYF3a6jSmNbRnalU6xxzQXQNM6levKiBMUFzc6IdCtMS0N7YUvgby8q2p8_ceQuRuCQrbpU-gBNfuoWXb52LsM3WQtDNzOfgonMvRRq8eiRy01IiDw-K5DVefRXiqx_wAQUJYmHwULSS36z70MY9lkoZ3B-aM4vCQu2BalDlrrpTPdCsffn1uvDQ_YrLJqA
+
+### 2. Obtener el token de acceso
+curl -X POST 'http://localhost:9000/oauth2/token' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Basic d2ViLWNsaWVudDp3ZWItc2VjcmV0' \
+  - d 'grant_type=authorization_code&code=TU_CODIGO_AQUI&redirect_uri=http://localhost:8081/callback&code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk'
+
+### 2.1
+curl -X POST 'http://localhost:9000/oauth2/jwks' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Basic d2ViLWNsaWVudDp3ZWItc2VjcmV0' \
+  -d 'token={{token}}']'
+
+
+### 3  Usando el endpoint de introspección:
+curl -X POST 'http://localhost:9000/oauth2/introspect' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Basic d2ViLWNsaWVudDp3ZWItc2VjcmV0' \
+  -d 'token={{token}}'
+
+### 4. userinfo
+curl -X GET 'http://localhost:9000/userinfo' \
+  -H 'Authorization: Bearer {{token}}'  
+
+### 5. /api/public
+curl -X GET 'http://localhost:9000/api/public' \
+  -H 'Authorization: Bearer {{token}}'  
+
+
+### 6. /api/protected
+curl -X GET 'http://localhost:9000/api/protected' \
+  -H 'Authorization: Bearer {{token}}'  
